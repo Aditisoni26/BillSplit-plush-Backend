@@ -10,7 +10,8 @@ app.use(
     cors({
         origin: [
             "http://localhost:5173",
-            "https://bill-split-plush-frontend.vercel.app"
+            "https://bill-split-plush-frontend.vercel.app",
+            "https://bill-split-plush-frontend-fhl1c20ps.vercel.app" // Add this
         ],
         credentials: true,
         allowedHeaders: ["Content-Type", "Authorization"],
