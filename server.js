@@ -8,11 +8,17 @@ const app = express();
 
 app.use(
     cors({
-        origin: "https://bill-split-plush-frontend.vercel.app/api",
+        origin: [
+            "http://localhost:5173",
+            "https://bill-split-plush-frontend.vercel.app"
+        ],
         credentials: true,
-        allowedHeaders: ["Content-Type", "Authorization"]
+        allowedHeaders: ["Content-Type", "Authorization"],
+        methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"]
     })
 );
+app.options("*", cors());
+
 
 
 app.use(express.json());
