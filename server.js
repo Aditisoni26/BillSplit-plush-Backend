@@ -8,7 +8,7 @@ const app = express();
 
 app.use(
     cors({
-        origin: "https://bill-split-plush-frontend.vercel.app/",
+        origin: "https://bill-split-plush-frontend.vercel.app",
         credentials: true,
         allowedHeaders: ["Content-Type", "Authorization"]
     })
