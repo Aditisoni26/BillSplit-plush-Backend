@@ -1,5 +1,5 @@
 module.exports = function calculateSettlement(expenses) {
-    const balances = {}; // ✅ THIS WAS MISSING
+    const balances = {}; 
 
     // STEP 1: build balance sheet
     expenses.forEach(exp => {
