@@ -98,14 +98,14 @@ router.delete("/:expenseId", auth, async(req, res) => {
             return res.status(404).json({ message: "Expense not found" });
         }
 
-        // ✅ FETCH GROUP FIRST
+        //  FETCH GROUP FIRST
         const group = await Group.findById(expense.groupId);
 
         if (!group) {
             return res.status(404).json({ message: "Group not found" });
         }
 
-        // ✅ ONLY GROUP CREATOR CAN DELETE
+        // ONLY GROUP CREATOR CAN DELETE
         if (String(group.createdBy) !== String(req.user)) {
             return res.status(403).json({ message: "Only group creator can delete expenses" });
         }
