@@ -11,9 +11,7 @@ const auth = require("../middleware/auth");
 const calculateSettlement = require("../utils/calculateSettlement");
 const createNotification = require("../utils/createNotification");
 
-/* ======================
-   CREATE GROUP
-====================== */
+/*    CREATE GROUP */
 router.post("/", auth, async(req, res) => {
     try {
         const group = await Group.create({
@@ -28,9 +26,7 @@ router.post("/", auth, async(req, res) => {
     }
 });
 
-/* ======================
-   ADD MEMBER
-====================== */
+/* ADD MEMBER  */
 router.post("/:groupId/members", auth, async(req, res) => {
     try {
         const { username } = req.body;
@@ -57,7 +53,7 @@ router.post("/:groupId/members", auth, async(req, res) => {
             await group.save();
         }
 
-        // 🔔 Notifications (non-blocking)
+        // Notifications (non-blocking)
         try {
             await createNotification(userToAdd._id, {
                 group: group._id,
@@ -91,9 +87,7 @@ router.post("/:groupId/members", auth, async(req, res) => {
     }
 });
 
-/* ======================
-   MY GROUPS
-====================== */
+/* MY GROUPS */
 router.get("/my", auth, async(req, res) => {
     try {
         const groups = await Group.find({ members: req.user })
@@ -106,9 +100,7 @@ router.get("/my", auth, async(req, res) => {
     }
 });
 
-/* ======================
-   GET GROUP
-====================== */
+/* GET GROUP */
 router.get("/:groupId", auth, async(req, res) => {
     const group = await Group.findById(req.params.groupId).populate(
         "members",
@@ -122,9 +114,7 @@ router.get("/:groupId", auth, async(req, res) => {
     res.json(group);
 });
 
-/* ======================
-   REMOVE MEMBER
-====================== */
+/* REMOVE MEMBER */
 router.delete("/:groupId/members/:memberId", auth, async(req, res) => {
     try {
         const { groupId, memberId } = req.params;
@@ -164,7 +154,7 @@ router.delete("/:groupId/members/:memberId", auth, async(req, res) => {
         );
         await group.save();
 
-        // 🔔 Notifications (safe)
+        //  Notifications (safe)
         try {
             await createNotification(memberId, {
                 group: group._id,
@@ -193,9 +183,7 @@ router.delete("/:groupId/members/:memberId", auth, async(req, res) => {
     }
 });
 
-/* ======================
-   DELETE GROUP
-====================== */
+/* DELETE GROUP */
 router.delete("/:groupId", auth, async(req, res) => {
     try {
         const group = await Group.findById(req.params.groupId);
